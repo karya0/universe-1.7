@@ -45,13 +45,7 @@
     ],
     "container": {
         "type": "DOCKER",
-        "docker": {
-            "image": "{{resource.assets.container.docker.spark_docker}}",
-            "network": "HOST",
-            "forcePullImage": true
-        }
 {{#security.authn.enabled}}
-        ,
         "volumes": [
             {
                 "containerPath": "{{security.authn.opt_mesosphere_dir}}",
@@ -63,7 +57,13 @@
               "hostPath": "{{security.authn.dcos_service_account_credential_dir}}",
               "mode": "RO"
             }
+        ],
 {{/security.authn.enabled}}
+        "docker": {
+            "image": "{{resource.assets.container.docker.spark_docker}}",
+            "network": "HOST",
+            "forcePullImage": true
+        }
     },
     "healthChecks": [
         {
